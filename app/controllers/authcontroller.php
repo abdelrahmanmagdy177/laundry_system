@@ -15,20 +15,24 @@ class authcontroller extends Controller {
         $this->userModel = new User();
     }
 
-    public static function  isloggedin() {
-        // Check if the user is already on the login page
-        $currentUrl = $_SERVER['REQUEST_URI'];
-        if (strpos($currentUrl, 'auth/login') !== false) {
-            return; // Do not redirect if already on the login page
-        }
-
-        // Redirect if the user is not logged in
-        if (!Session::get('user')) {
-            Helpers::redirect('auth/login');
+    public static function isloggedin() {
+        // Start session if not already started
+        Session::Start();
+    
+        // Check if user is already logged in
+        if (Session::get('user')) {
+            // If user is on the login page, redirect them to another page
+            $currentUrl = $_SERVER['REQUEST_URI'];
+            if (strpos($currentUrl, 'auth/login') !== false) {
+                Helpers::redirect('home/index'); // Redirect logged-in users away from login page
+                exit;
+            }
         }
     }
+    
 
     public function login() {
+        self::isloggedin();
         $this->view('auth/login', []);
     }
 

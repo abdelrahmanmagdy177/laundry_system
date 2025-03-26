@@ -6,14 +6,9 @@ use MVC\core\controller;
 use MVC\core\helpers;
 use MVC\core\Session;
 use MVC\controllers\authcontroller;
-class permissioncontroller extends Controller {
+interface permissioncontroller  {
 
 
-    public function __construct() {
-        Session::Start();
-        if(Session::get('user')['role'] != 1){
-            Helpers::redirect('home/index');
-        }
+    public function checkauth(): bool;
     
     }
-}

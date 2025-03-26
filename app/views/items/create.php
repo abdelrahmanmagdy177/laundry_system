@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Invoice</title>
     <link rel="stylesheet" href="<?= path; ?>back/css/create_item.css">
+    <?php  include_once(VIEW.'home/header.php'); ?>
 </head>
 <body>
     <?php
@@ -36,11 +37,8 @@
             <tbody id="items">
                 <tr>
                     <td>
-                        <select name="items[0][name]" required>
-                        <?php foreach ($data as $item): ?>
-                            <option value="<?= $item['name'] ?>"><?= $item['name'] ?></option>
-                        <?php endforeach; ?>
-                        </select>
+                       
+                        <input type="text" name="items[0][name]" required>
                     </td>
                     <td>
                         <select name="items[0][operation_type]" required>
